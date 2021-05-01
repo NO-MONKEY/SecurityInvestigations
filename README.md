@@ -5,4 +5,4 @@ This repository aims to publish evidence and further details of the security res
 # Investigations
 
 ## - What's the security meaning of SAP's third-party add-on certification
-- [Mail communication with SAP ICC and archived collaterals and blogs]()
+- [Mail communication with SAP ICC and archived collaterals and blogs](https://github.com/NO-MONKEY/SecurityInvestigations/tree/main/SAPICC_3rdPartyCert)
