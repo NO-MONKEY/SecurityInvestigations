@@ -1,0 +1,27 @@
+Description:
+
+According to the announcement https://blogs.sap.com/2020/03/19/sap-abap-security-code-scan/ the SAP ICC should perform code security scans on 3rd party add-ons requesting certification and listing on the CSD (https://www.sap.com/dmc/exp/2013_09_adpd/enEN/#/solutions) by SAP. According to the announcement, the party requesting for certification has to remediate certain detected ABAP code vulnerabilities in their add-on deployment.
+The announcement has gaps regarding the verification process, as such I queried the SAP ICC team in behalf of a customer of us while evaluating certain security add-ons.
+Please find attached file "SAP_CDS_Code Scan results AddOns.pdf" containing the answer of the SAP ICC team. Certain security defects can be recognized:
+-  The code scan is solely conducted in the environment of the certification partner. There is no verification of completeness and integrity of the results
+-  Because CVA is itself an add-on it depends on the integrity of the system to where executed
+- The scan results should be provided by the certification partner to any customer interested in the results. There is no option of control, for example by digital signatures for the customer to actually receive the correct results, belonging to the certified version from the vendor
+- By requesting three different vendors with certifications issued from July 2020, non of them got a CVA license or where asked to provide results of a code scan, got provided scanning results or anything else. Actually the security process has not been executed at all.
+- Furthermore the announcement as well as the statement from SAP ICC was contradicted in the mail thread SAP_CDS_Code Scan results AddOns.pdf
+
+Lately SAP ICC introduced a premium certification of add-ons. On of the differences mentioned are the " added security, in-depth testing " activities in the certification process. On of the vendors I requested for the results of the code scan provides is an SAP endorsed premium certified add-on. Like the others, there was no code scan conducted as part of the certification. As you'll find in the email thread, the static code analysis should be a mandatory activity for the premium certification also by the understanding of SAP ICC (see SAP_CDS_PremiumCertification.pdf).
+
+According to the announced additional security verification activities, SAP customer can falsely  but understandably assume a security level of certified add-ons which is in fact not given. Because of the announcement, SAP customers cut their security verification efforts for certified 3rd party solutions assuming adequate substitution by SAP ICC and the updates to the certification process.
+
+Steps to Reproduce:
+
+Just query SAP ICC like I did
+
+Attack Scenario:
+
+Malware delivery using software supply chain attacks. The malware gets introduced in a software artefact created or reused by the 3rd party software vendor. As a result the malware runs on the SAP system's service user level and can't be recognized on the operating system level
+
+Additional Information:
+
+
+ALNR|C|HHH

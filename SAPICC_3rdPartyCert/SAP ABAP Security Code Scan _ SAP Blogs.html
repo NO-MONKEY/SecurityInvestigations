@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="en-US">
+<![endif]-->
+
+<!--[if gte IE 9]>
+<html class="ie" lang="en-US">
+<![endif]-->
+
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar" content="black"/>
+    <title>SAP ABAP Security Code Scan | SAP Blogs</title>
+    <link rel="profile" href="http://gmpg.org/xfn/11"/>
+
+    
+    
+    <!--[if lt IE 9]>
+    <script src="https://blogs.sap.com/wp-content/themes/sap-v3-neo/js/html5.min.js" type="text/javascript"></script>
+    <![endif]-->
+
+    <link rel="icon" type="image"  href="https://static.community.services.sap/com-hdr/v5/403.184/shared-ui/1dx-assets/images/favicon.png" /><link rel="shortcut icon" type="image/x-icon"  href="https://static.community.services.sap/com-hdr/v5/403.184/shared-ui/1dx-assets/images/favicon.ico" /><link rel="apple-touch-icon" href="https://static.community.services.sap/com-hdr/v5/403.184/shared-ui/1dx-assets/images/apple-touch-icon.png" /><link rel='dns-prefetch' href='//static.community.services.sap' />
+<link rel='dns-prefetch' href='//accounts.sap.com' />
+<link rel='dns-prefetch' href='//assets.adobedtm.com' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="SAP Blogs &raquo; Feed" href="https://blogs.sap.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="SAP Blogs &raquo; Comments Feed" href="https://blogs.sap.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="SAP Blogs &raquo; SAP ABAP Security Code Scan Comments Feed" href="https://blogs.sap.com/2020/03/19/sap-abap-security-code-scan/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/blogs.sap.com\/res1dx-3307\/wp-includes\/js\/wp-emoji-release.min.js"}};
+			!function(e,a,t){var r,n,o,i,p=a.createElement("canvas"),s=p.getContext&&p.getContext("2d");function c(e,t){var a=String.fromCharCode;s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,e),0,0);var r=p.toDataURL();return s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,t),0,0),r===p.toDataURL()}function l(e){if(!s||!s.fillText)return!1;switch(s.textBaseline="top",s.font="600 32px Arial",e){case"flag":return!c([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])&&(!c([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!c([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]));case"emoji":return!c([55357,56424,8205,55356,57212],[55357,56424,8203,55356,57212])}return!1}function d(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(i=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},o=0;o<i.length;o++)t.supports[i[o]]=l(i[o]),t.supports.everything=t.supports.everything&&t.supports[i[o]],"flag"!==i[o]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[i[o]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(r=t.source||{}).concatemoji?d(r.concatemoji):r.wpemoji&&r.twemoji&&(d(r.twemoji),d(r.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='twentytwelve-fonts-css'  href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700&#038;subset=latin,latin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='twentytwelve-style-css'  href='https://blogs.sap.com/res1dx-3307/wp-content/themes/sap-v3-neo/style.min.css' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentytwelve-ie-css'  href='https://blogs.sap.com/res1dx-3307/wp-content/themes/sap-v3-neo/css/ie.css' type='text/css' media='all' />
+<![endif]-->
+<link rel='stylesheet' id='designmate_styles-css'  href='https://static.community.services.sap/designmate/v3/708.0/latest/designmate.css' type='text/css' media='all' />
+<link rel='stylesheet' id='designsystem_styles-css'  href='https://static.community.services.sap/community-ds/v1/3678.0/main.css' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-block-library-css'  href='https://blogs.sap.com/res1dx-3307/wp-includes/css/dist/block-library/style.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='prism-css'  href='https://blogs.sap.com/res1dx-3307/wp-includes/js/tinymce/plugins/codesample/css/prism.css' type='text/css' media='all' />
+<link rel='stylesheet' id='sap_custom_link_css-css'  href='https://blogs.sap.com/res1dx-3307/wp-content/plugins/sap-core-custom//include/css/sap-core-custom.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='sap_lightbox_gallery_css-css'  href='https://blogs.sap.com/res1dx-3307/wp-content/plugins/sap-lightbox-gallery/lib/lightbox-gallery.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='pt_style_css-css'  href='https://blogs.sap.com/res1dx-3307/wp-content/plugins/sap-primary-tag/css/pt_style.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='wordpress-popular-posts-css-css'  href='https://blogs.sap.com/res1dx-3307/wp-content/plugins/wordpress-popular-posts/public/css/wpp.css' type='text/css' media='all' />
+<script type='text/javascript' src='https://blogs.sap.com/res1dx-3307/wp-includes/js/jquery/jquery.js' id='jquery-core-js'></script>
+<script type='text/javascript' id='jquery-core-js-after'>
+if (jQuery !== undefined) {
+                jQuery(window).load(function(){
+                    var _wpWindowLoaded = document.createElement("div");
+                    _wpWindowLoaded.setAttribute("class", "hidden");
+                    _wpWindowLoaded.setAttribute("id", "wp_window_loaded");
+                    document.body.appendChild(_wpWindowLoaded);
+                });
+            }
+</script>
+<script type='text/javascript' src='//assets.adobedtm.com/ccc66c06b30b/d266848b2882/launch-f095fbc32a96.min.js' id='scn_adobe_dtm-js'></script>
+<script type='text/javascript' id='wpp-js-js-extra'>
+/* <![CDATA[ */
+var wpp_params = {"sampling_active":"","sampling_rate":"100","ajax_url":"https:\/\/blogs.sap.com\/wp-admin\/admin-ajax.php","action":"update_views_ajax","ID":"1066677","token":"41859c448f"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://blogs.sap.com/res1dx-3307/wp-content/plugins/wordpress-popular-posts/public/js/wpp.js' id='wpp-js-js'></script>
+<link rel="https://api.w.org/" href="https://blogs.sap.com/wp-json/" /><link rel="alternate" type="application/json" href="https://blogs.sap.com/wp-json/wp/v2/posts/1066677" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://blogs.sap.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://blogs.sap.com/wp-includes/wlwmanifest.xml" /> 
+
+<link rel="canonical" href="https://blogs.sap.com/2020/03/19/sap-abap-security-code-scan/" />
+<link rel='shortlink' href='https://blogs.sap.com/?p=1066677' />
+<script type="text/javascript">var ajaxurl = "https://blogs.sap.com/wp-admin/admin-ajax.php";var likePostLabel = "Like";var unLikePostLabel = "Liked";var likeCommentLabel = "Like";var unLikeCommentLabel = "Liked";</script><meta name="type" content="Blog"><meta name="description" content="SAP customers have always worked with SAP partners and ISVs to augment their SAP environment with third-party ABAP add-ons, that customers license directly from SAP partners. The security of these 3rd party">    <!--[if IE ]>
+    <link rel="stylesheet" id="scn-ie-styles" href="https://blogs.sap.com/wp-content/themes/sap-v3-neo/css/ie.css"
+          type="text/css" media="all">
+    <link id="ids-popup-css" href="https://accounts.sap.com/universalui/shared/stylesheets/idsPopup.css"
+          rel="stylesheet"
+          type="text/css">
+    <![endif]-->
+
+
+</head>
+
+<body class="post-template-default single single-post postid-1066677 single-format-standard custom-font-enabled">
+
+
+<div class="page-wrapper">
+<b class="cn-accessibility"><a href="#main" tabindex="0" accesskey="S">Skip to Content</a></b>
+<div id="page" class="hfeed site">
+
+<header id="masthead" class="blogs-nav sap-header">
+    <header id="comm-hdr-Header" role="masthead"><div class="dm-header"><div class="dm-header__inner"><div class="dm-header__logo-wrapper"><a class="dm-logo--header" href="http://www.sap.com/" title="SAP"></a></div><nav id="comm-hdr-Navigation" class="dm-mainNav"><div class="dm-mobileSearch"><form class="dm-header__search-form" action=""><div class="dm-search-container dm-input dm-search__input"><label class="dm-input__box"><input class="dm-input__control" placeholder="Search SAP Community" name="filter-search" type="search" required=""><button class="dm-search__button dm-search__button-clear" type="reset" role="button" title="Reset Search"><span class="dm-search__buttonIcon dm-icon-encoded--close" role="img" aria-labelledby="title"><title>Reset</title></span></button><button class="dm-search__button dm-search__button-submit" type="submit" role="button" title="Search SAP Community"><span class="dm-search__buttonIcon dm-icon-encoded--search" role="img" aria-labelledby="title"><title>Search</title></span></button></label></div></form></div><ul class="dm-mainNav__menu" role="menubar"><li class="dm-header__homeItem" role="none"><a class="dm-header__homeItem-link" role="menuitem" aria-label="Community Home" target="_self" href="https://community.sap.com">Community</a></li><li class="dm-mainNav__menuItem" role="none"><a class="dm-mainNav__menuItem-link" href="https://community.sap.com/topics" aria-label="" aria-haspopup="false" role="menuitem">Topics<span class="dm-mainNav__menuItem-arrow dm-icon-encoded dm-icon-encoded--arrow-right"></span></a></li><li class="dm-mainNav__menuItem dm-mainNav--hasSubMenu" role="none"><a class="dm-mainNav__menuItem-link" href="https://answers.sap.com/index.html" aria-label="Answers. Press Arrow Down to expand the submenu and navigate with arrow keys." aria-haspopup="true" role="menuitem">Answers<span class="dm-mainNav__menuItem-arrow dm-icon-encoded dm-icon-encoded--arrow-right"></span></a></li><li class="dm-mainNav__menuItem dm-mainNav--hasSubMenu" role="none"><a class="dm-mainNav__menuItem-link" href="https://blogs.sap.com" aria-label="Blogs. Press Arrow Down to expand the submenu and navigate with arrow keys." aria-haspopup="true" role="menuitem">Blogs<span class="dm-mainNav__menuItem-arrow dm-icon-encoded dm-icon-encoded--arrow-right"></span></a></li><li class="dm-mainNav__menuItem dm-mainNav--hasSubMenu" role="none"><a class="dm-mainNav__menuItem-link" href="https://community.sap.com/events" aria-label="Events. Press Arrow Down to expand the submenu and navigate with arrow keys." aria-haspopup="true" role="menuitem">Events<span class="dm-mainNav__menuItem-arrow dm-icon-encoded dm-icon-encoded--arrow-right"></span></a></li><li class="dm-mainNav__menuItem dm-mainNav--hasSubMenu" role="none"><a class="dm-mainNav__menuItem-link" href="https://community.sap.com/programs" aria-label="Programs. Press Arrow Down to expand the submenu and navigate with arrow keys." aria-haspopup="true" role="menuitem">Programs<span class="dm-mainNav__menuItem-arrow dm-icon-encoded dm-icon-encoded--arrow-right"></span></a></li><li class="dm-mainNav__menuItem dm-mainNav--hasSubMenu" role="none"><a class="dm-mainNav__menuItem-link" href="https://community.sap.com/resources" aria-label="Resources. Press Arrow Down to expand the submenu and navigate with arrow keys." aria-haspopup="true" role="menuitem">Resources<span class="dm-mainNav__menuItem-arrow dm-icon-encoded dm-icon-encoded--arrow-right"></span></a></li><li class="dm-mainNav__menuItem" role="none"><a class="dm-mainNav__menuItem-link" href="https://community.sap.com/resources/what-is-new" aria-label="" aria-haspopup="false" role="menuitem">What's New<span class="dm-mainNav__menuItem-arrow dm-icon-encoded dm-icon-encoded--arrow-right"></span></a></li></ul></nav><ul class="dm-header__actions"><li id="comm-hdr-Search" class="dm-header__actions-item dm-headerSearch"><a class="dm-search-action dm-icon-encoded dm-header__search-icon" aria-label="Search the SAP Community" href="#" role="button" aria-expanded="false" title="Search"></a><div class="dm-headerSearch__wrapper"><form class="dm-searchdropdown dm-align-center" action=""><div class="dm-search__input dm-input" role="search"><label class="dm-input__box"><input class="dm-input__control" placeholder="Search the SAP Community" name="filter-search" type="input"><button class="dm-search__button dm-search__button-clear" type="reset" title="Reset"><span class="dm-search__buttonIcon dm-icon-encoded--clear" role="img" aria-labelledby="title"><title>Reset</title></span></button><button class="dm-search__button dm-search__button-submit" type="submit" title="Search the SAP Community"><span class="dm-search__buttonIcon dm-icon-encoded--search" role="img" aria-labelledby="title"><title>Search</title></span></button></label></div></form><a class="dm-headerSearch__closeButton" type="submit" role="button" title="Close search input"><span class="dm-icon-encoded dm-icon-encoded--close" role="img" aria-labelledby="title"></span></a></div></li><li id="comm-hdr-Authentication" class="dm-header__actions-item dm-header__account"><a id="comm-hdr-SignIn" class="dm-user__login-button--wrapper" aria-expanded="false" role="button" href="#" rel="IDS_login"><div id="comm-hdr-AnonymousIcon" class="dm-icon-encoded dm-icon-encoded--account dm-hidden" aria-label="login"></div><div id="comm-hdr-Avatar" class="dm-user dm-header__avatar"><img class="dm-header__avatar-image dm-hidden" data-src="" src="" width="24px" height="24px"><span class="dm-header__notifications dm-hidden js-notification-indicator"></span></div></a><ul id="comm-hdr-UserProfileMenu" class="dm-header__actionsSubMenu dm-profileMenu" aria-label="People profile" data-name="actionsMenu"><div class="dm-mobileSearch"><form class="dm-header__search-form" action=""><div class="dm-search-container dm-input dm-search__input"><label class="dm-input__box"><input class="dm-input__control" placeholder="Search SAP Community" name="filter-search" type="search" required=""><button class="dm-search__button dm-search__button-clear" type="reset" role="button" title="Reset Search"><span class="dm-search__buttonIcon dm-icon-encoded--close" role="img" aria-labelledby="title"><title>Reset</title></span></button><button class="dm-search__button dm-search__button-submit" type="submit" role="button" title="Search SAP Community"><span class="dm-search__buttonIcon dm-icon-encoded--search" role="img" aria-labelledby="title"><title>Search</title></span></button></label></div></form></div><li class="dm-header__actionsSubMenu-title"><a id="comm-hdr-SubMenuTitleLink" class="dm-header__actionsSubMenu-title-link" href="" role="button">My profile<span class="dm-header__actionsSubMenu-title-arrow dm-icon-encoded--arrow-left"></span></a></li><li class="dm-profileMenu__userData"><div class="dm-profileMenu__avatar dm-author"><a id="comm-hdr-MenuAvatar" class="dm-profileMenu__avatar__image" href="" title=""><img data-src="" src=""></a></div><div id="comm-hdr-Username" class="dm-profileMenu__userName"></div><div id="comm-hdr-Email" class="dm-profileMenu__userEmail"></div></li><li id="comm-hdr-ProfileMenuTopSection" class="dm-profileMenu__section"><ul class="dm-profileMenu__list"></ul></li><li id="comm-hdr-ProfileMenuMiddleSection" class="dm-profileMenu__section"><ul class="dm-profileMenu__list"></ul></li><li class="dm-profileMenu__section"><ul class="dm-profileMenu__list dm-profileMenu__logout"><li class="dm-profileMenu__item"><a id="comm-hdr-LogOut" class="dm-profileMenu__link" href="#">Logout</a></li></ul></li></ul></li><li class="dm-header__actions-item dm-header__mobileMenu"><a id="comm-hdr-MobileMenuBtn" class="dm-mobileMenuButton" aria-label="Search SAP community"><span class="dm-icon-encoded dm-icon-encoded--mobile-menu"></span><span style="display:none;">Search</span></a></li></ul></div></div></header><div class="dm-wrapper dm-subheader dm-subheader--wrapper  dm-user--unauthenticated "><div class="dm-grid"><div class="dm-breadcrumb dm-user--unauthenticated" role="menubar">
+    <ul class="dm-breadcrumb-nav" role="navigation" aria-label="breadcrumb navigation">
+        
+        <li><a id="comm-shdr-breadcrumb-home" href="https://www.sap.com" title="Home">Home</a></li>
+        
+        <li><a id="comm-shdr-breadcrumb-community" href="https://community.sap.com" title="Community">Community</a></li>
+        
+    </ul>
+    <ul class="dm-breadcrumb-actions" role="menu">
+        
+        <li><a id="comm-shdr-AskQuestion" href="https://answers.sap.com/questions/ask.html" title="Ask a Question">Ask a Question</a></li>
+        
+        <li><a id="comm-shdr-WriteBlogPost" href="https://blogs.sap.com/wp-admin/post-new.php" title="Write a Blog Post">Write a Blog Post</a></li>
+        
+        <li class="dm-user__login-button--wrapper"><a class="dm-button-small dm-button--primary" role="button" rel="IDS_login" aria-label="Login or Sign up. Click here to log in or sign up"><span class="dm-button-text">Login / Sign-up</span></a></li>
+        <li class="dm-breadcrumb-actions__dropdown">
+            <span id="comm-shdr-actions-opener" class="dm-breadcrumb-actions__dropdown-toggle" title="Community actions">
+                 <span class="dm-icon-encoded dm-icon-encoded--3dots"></span>
+            </span>
+            <ul id="comm-shdr-user-actions-ul" class="dm-breadcrumb-actions__dropdown-menu" role="menu">
+            </ul>
+        </li>
+    </ul>
+</div>
+</div></div>    <!-- #site-navigation -->
+
+</header>
+
+<!-- #masthead -->
+<div id="main" tabindex="0" class="wrapper">
+
+
+
+<div class="dm-wrapper">
+  <div class="dm-grid">
+    <div class="dm-section dm-section--first">
+      <div class="dm-layout__flexRow">
+        <div class="dm-layout__flexColumn">
+          <!-- Hero unit start -->
+          
+<div class="dm-contentHero">
+    <div class="dm-contentHero__row">
+        <div class="dm-contentHero__category">
+            <span class="dm-contentHero__category-item">Technical Articles</span>        </div>
+    </div>
+    <div class="dm-contentHero__row">
+        <div class="dm-contentHero__column">
+            <div class="dm-contentHero__author-avatar">
+                <a class="dm-author__image " href="https://people.sap.com/forrest.hu"  >
+                    <img alt='Author&#039;s profile photo Forrest Hu' src='https://avatars.services.sap.com/images/forrest.hu_small.png' class='avatar avatar-48 photo avatar-default dm-author__image' height='48' width='48' />                </a>
+            </div>
+        </div>
+        <div class="dm-contentHero__column dm-contentHero__flexColumn--wrap">
+            <div class="dm-contentHero__author">
+                <div class="dm-author__data">
+                    <div class="dm-author__heading">
+                        <a class="dm-author__name " aria-label="Author name Forrest Hu" href="https://people.sap.com/forrest.hu" >Forrest Hu</a>
+                        <span class="dm-user__roles"><span class="dm-icon-encoded--employee" title="This user is an SAP Employee" data-role-name="SAP Employee"></span></span>                    </div>
+                    <div class="dm-contentHero__metadata">
+                        <span class="dm-contentHero__metadata--item">
+                            <span class="dm-accesible-hidden"> Posted on</span> 
+                            March 19, 2020                        </span>
+                        <span class="dm-contentHero__metadata--item">2 minute read</span>
+                    </div>
+                </div>
+            </div>
+            <div class="dm-contentHero__headline">
+                <h1 class="dm-contentHero__title">SAP ABAP Security Code Scan</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="dm-contentHero__actions">
+        <div class="dm-contentFollow dm-contentHero__contentFollow onscroll_sticky">
+            <a class="dm-button-small dm-button--callToAction sap-button-follow" id="sap-button-follow-hdr-id" href="https://blogs.sap.com/wp-login.php?redirect_to=https%3A%2F%2Fblogs.sap.com%2F2020%2F03%2F19%2Fsap-abap-security-code-scan%2F%3Fs_action%3Dss_change_follow_status%26nonce%3D8c12d12a10" rel="IDS_login"  role="button" data-content-type="blogpost" data-content-id="1066677" data-nonce="8c12d12a10" title="Please log into the system to use follow/unfollow functionality."><span class="dm-button-text">Follow</span></a>            <a class="dm-button-small dm-button--secondary" role="button" type="button" href="https://blogs.sap.com/2020/03/19/sap-abap-security-code-scan/feed/"><span class="dm-button-text">RSS feed</span></a>
+            <a class='dm-button-small dm-button--secondary likes-post-link dolike ' rel='IDS_login' href='https://blogs.sap.com/wp-login.php?redirect_to=https%3A%2F%2Fblogs.sap.com%2F2020%2F03%2F19%2Fsap-abap-security-code-scan%2F%3Fs_action%3Dss_change_like_status%26nonce%3D95cd4befcb' role='button' type='button' title='Like' data-nonce='95cd4befcb' data-post-id='1066677'><span class='dm-button-text'>Like</span></a>        </div>
+        <div class="dm-contentHero__statistics">
+            <div class="dm-contentHero__metadata">
+                <span id="dm-contentHero__metadata--likes" class="dm-contentHero__metadata--item">
+                    5 Likes                </span>
+                <span class="dm-contentHero__metadata--item">
+                    1,524 View                </span>
+                <span class="dm-contentHero__metadata--item">
+                    1 Comment                </span>
+                <span class="dm-contentHero__metadata--item">
+                                    </span>
+            </div>
+        </div>
+    </div>
+</div>          <!-- Hero unit end -->
+          <div class="dm-contentDetail">
+            <div class="dm-contentDetail__body-content">
+                <p>SAP customers have always worked with SAP partners and ISVs to augment their SAP environment with third-party ABAP add-ons, that customers license directly from SAP partners. The security of these 3<sup>rd</sup> party ABAP add-on is becoming more and more a topic of interest in the licensing process. CIOs or project managers have a long check list, on which they always put security on top and as solution provider, the partners are always being asked, “Does your add-on secure and has it been assessed by SAP? “</p>
+<p>To help partners address this question, the SAP Integration and Certification Center (SAP ICC) has introduced an optional service ABAP Security Code Scan for any ABAP add-on that partners certify via SAP ICC.</p>
+<p>SAP ABAP Security Code Scan will use SAP tool, CVA (Code Vulnerability Analyzer), to scan the code base, reporting issues and propose correction solutions. This aims to support partners troubleshoot their add-ons prior to deployment in a customer environment. However, ultimately customers and partners will always need to verify the add-on in the customer’s individual environment again for full due diligence.</p>
+<p>Here some details, what SAP ICC will help partners test in a lab environment. CVA will cover below software security aspects:</p>
+<ul>
+<li>Manipulation of dynamic Open SQL (Open SQL Injection)</li>
+<li>Manipulation of SQL statements (Native SQL Injection)</li>
+<li>Manipulation of dynamically generated ABAP code (ABAP Command Injections)</li>
+<li>Manipulation in dynamic calls (Call Injections)</li>
+<li>Injections of operating system commands</li>
+<li>Potential unauthorized access to directories and files (Directory Traversal)</li>
+<li>Insufficient authorization checks of user administration bypassed</li>
+<li>Potential back doors</li>
+<li>Possible attacks using Web technologies</li>
+<li>Further checks</li>
+</ul>
+<p>CVA, as a tool specific for ABAP add-on, has below advantages:</p>
+<p><strong>Scan efficiently</strong></p>
+<ul>
+<li>Reduced false-positive rate by dataflow analysis.</li>
+<li>Scanning directly from within the ABAP development environment with broad range of predefined checks</li>
+</ul>
+<p><strong>Developer guidance</strong></p>
+<ul>
+<li>Detailed help and explanations to all errors and assistance to find the right location for the fix</li>
+<li>Prioritization of checks. CVA will report the issues by categorize them as Priority 1, Priority 2 and Priority 3 issues.</li>
+</ul>
+<p><strong>Integration</strong></p>
+<ul>
+<li>Integrated into standard ABAP check frameworks, SAP transport system and ABAP Test Cockpit (ATC)</li>
+</ul>
+<p>&nbsp;</p>
+<p>SAP CVA report run will depend on the variant delivered by SAP as a standard. Below are the variants for SAP ERP and SAP S/4HANA on Premise.</p>
+<p><strong>SAP NetWeaver releases 7.50 SP3 (SAP ECC 6.0 or above)</strong></p>
+<ul>
+<li>Security Analyses in Extended Program Check (SLIN)</li>
+<li>Critical Statements</li>
+<li>Find Specific Critical Statements</li>
+<li>Dynamic and Client-Specific Accesses in SELECT</li>
+<li>Dynamic and Client-Specific Assesses with INSERT, UPDATE, MODIFY, DELET</li>
+<li>Use of ADBC Interface</li>
+<li>Client-Specific Shared Objects methods</li>
+</ul>
+<p><strong>SAP S/4HANA on Premise 1809 or above</strong></p>
+<ul>
+<li>DDIC: DB Tables(Logging Check)</li>
+<li>Security Checks for ABAP (CVA)</li>
+<li>Security Checks for BSP (CVA)</li>
+<li>Critical Statements</li>
+<li>Find Specific Critical Statements</li>
+<li>Dynamic and Client-Specific Accesses in SELECT</li>
+<li>Dynamic and Client-Specific Assesses with INSERT, UPDATE, MODIFY, DELET</li>
+<li>Use of ADBC Interface</li>
+<li>Client-Specific Shared Objects methods</li>
+<li>Invalid access to CDS Views</li>
+</ul>
+<p>&nbsp;</p>
+<p>For partners who peruse certification, as you are requested to correct and mitigate Priority 1 and 2 issues reported by CVA, you are highly recommended to finish ABAP Security Code Scan first before you use AAK to assemble your code and start deployment certification. This way will prevent re-work to be happening as much as possible.</p>
+<p>In order to start SAP ABAP Security Code Scan, below are the major activities to be performed:</p>
+<ul>
+<li>Partners need to contact SAP ICC to start a service contract</li>
+<li>SAP ICC consultant will schedule kick-off meeting to illustrate the assessment process and activate CVA license</li>
+<li>SAP ICC consultant will provide a Cookbook for partners with step-by-step guide to run the reports</li>
+<li>Partners are required to correct and mitigate Priority 1 and 2 issues reported</li>
+<li>To run CVA report as a final run for validating the result</li>
+</ul>
+<p>As a deliverable from SAP ABAP Security Code Scan, SAP ICC will issue an Assessment Report and mark this achievement along with your ABAP deployment certification on <a href="https://www.sap.com/dmc/exp/2013_09_adpd/enEN/#/d/partners" target="_blank" >CSD</a> ( Certified Solution Directory).</p>
+<p style="text-align: center">&#8211; END &#8211;</p>
+<p>&nbsp;</p>
+<p><strong>SAP ICC Contact information</strong>： icc-info@sap.com</p>
+<p><strong>Useful links</strong></p>
+<p>SAP note <a href="https://launchpad.support.sap.com/#/notes/1855773" target="_blank" >1855773</a> &#8211; Security checks for customer-specific ABAP programs</p>
+<p><a href="https://www.sap.com/documents/2018/11/ec5d12c6-287d-0010-87a3-c30de2ffd8ff.html" target="_blank" >Code Vulnerability Analyzer</a></p>
+<p>&nbsp;</p>
+            </div>
+            <ul class="dm-sharing-icons">
+               <li class='dm-sharing-icons--item'><a href='https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fblogs.sap.com%2F2020%2F03%2F19%2Fsap-abap-security-code-scan%2F' title='Share on Facebook' target='_blank'><span class='dm-icon-encoded--facebook'></span></a></li><li class='dm-sharing-icons--item'><a href='https://twitter.com/share?url=https%3A%2F%2Fblogs.sap.com%2F2020%2F03%2F19%2Fsap-abap-security-code-scan%2F&text=SAP+ABAP+Security+Code+Scan' title='Share on Twitter' target='_blank'><span class='dm-icon-encoded--twitter'></span></a></li><li class='dm-sharing-icons--item'><a href='https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fblogs.sap.com%2F2020%2F03%2F19%2Fsap-abap-security-code-scan%2F&title=SAP+ABAP+Security+Code+Scan' title='Share on LinkedIn' target='_blank'><span class='dm-icon-encoded--linkedin'></span></a></li>            </ul>
+            <div class="dm-actionbar__wrapper dm-collapse__wrapper">
+               <ul class="dm-actionbar dm-actionbar--links">
+                   <li class="dm-actionbar__item">
+    <a class="dm-actionbar__link dm-button--disabled"
+    data-toggle="collapse"
+    data-hide-class="dm-is-collapsed"
+    data-triggers=".alertModerator"
+    aria-expanded="false"
+    href="javascript:void(0);">Alert Moderator</a>
+  </li>
+               </ul>
+               
+  <div class="dm-actionbar__forms wprc-content-v3">
+    <div class="dm-actionsForm dm-is-collapsed alertModerator wprc-form-v3" data-toggle="collapseComponent" data-name="alertModerator">
+          </div>
+  </div>
+            </div>
+          </div>
+        </div>
+        <div class="dm-layout__flexColumn dm-layout--pullRight dm-layout--contentSidebar">
+            <div id="sapassignedtagswidget-v3-2" class="dm-widget widget_sapassignedtagswidget-v3 dm-widget--assignedTags"><h3 class="dm-widget__heading--small">Assigned tags</h3></div><div id="sap-relatedcontent-widget-v3-2" class="dm-widget widget_sap-relatedcontent-widget-v3 dm-widget--relatedContent"><h3 class="dm-widget__heading--small">Related Blog Posts</h3><ul class="dm-widgetlist" data-types="blogpost" data-limit="3"></ul></div><div id="sap-relatedcontent-widget-v3-3" class="dm-widget widget_sap-relatedcontent-widget-v3 dm-widget--relatedContent"><h3 class="dm-widget__heading--small">Related Questions</h3><ul class="dm-widgetlist" data-types="question" data-limit="3"></ul></div>        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="dm-wrapper">
+  <div class="dm-grid">
+    
+<div id="comments" class="dm-section dm-section--last" >
+      <div class="dm-section-header">
+      <div class="dm-section-header__title" title="Number of Comments">
+      1 Comment      </div>
+              <div class="dm-section dm-align-center dm-section-header__title" title="Please log on to comment" aria-role="alert">
+                You must be <a href="https://blogs.sap.com/wp-login.php?redirect_to=2020/03/19/sap-abap-security-code-scan" class="opener js-idspopup" rel="IDS_login" title="Log On">Logged on</a> to comment or reply to a post.
+        </div>
+          </div>
+
+    <div class="dm-filter-results dm-border--top">
+          <div class="dm-layout__flexRow">
+        <div class="dm-commentsbox dm-commentsbox--blogs">
+          <ul class="dm-list-comments">
+                <li class="comment byuser comment-author-ivan-ae even thread-even depth-1 dm-list-comments__item" id="li-comment-499898">
+        <article id="comment-499898">
+                    <div class="dm-list-comments__item-header"> <!--  header -->
+              <div class="dm-user">
+                <div class="dm-user__image dm-user__image--40"><img alt='Author&#039;s profile photo Ivan Mans' src='https://avatars.services.sap.com/images/ivan-ae_small.png' class='avatar avatar-48 photo avatar-default' height='48' width='48' /></div><div class="dm-user__data"><div class="dm-user__heading"> <a aria-label='Author name Ivan Mans'  href='https://people.sap.com/ivan-ae' rel='external nofollow' 
+        class='url ' >Ivan Mans</a> </div></div>              </div> <!-- .dm-user -->
+              <div class="dm-list-comments__item-date">
+                <a aria-label="Posted on March 26, 2020" href="https://blogs.sap.com/2020/03/19/sap-abap-security-code-scan/#comment-499898"><time datetime="2020-03-26T08:04:41+00:00"
+                >March 26, 2020 at 8:04 am</time></a>
+              </div> <!-- .dm-list-comments__item-date -->
+            </div> <!-- /header -->
+
+            <div class="dm-list-comments__item-content">
+                <p><span id="ember2476" class="ember-view"> A great initiative from SAP to (finally) embed code security in their add-on certification progress. Far too often we run into exploitable code vulnerabilities within 3rd party code.</span></p>
+                            </div><!-- section .comment-content.comment -->
+
+            <div id="comment-actions-499898" class="reply dm-actionbar__wrapper dm-collapse__wrapper" data-name="collapseWrapper" >
+                <ul class="dm-actionbar dm-actionbar--links" role="menubar" aria-label="action menu">
+                    <!-- render like, reply, edit, delete links -->
+                    <li class='dm-actionbar__item'><span class='likes-comment-link dm-actionbar__link dm-button--disabled'>Like</span><span class="dm-actionbar__score dm-button--disabled nb-likes-comment" id="nbLikeComment_499898">(0)</span></li>                </ul> <!-- .dm-actionbar .dm-actionbar--links -->
+                <div class="dm-actionbar--forms"></div>
+            </div><!-- .reply .dm-actionbar__wrapper -->
+        </article>
+            </li><!-- #comment-## -->
+          </ul><!-- .commentlist -->
+
+          
+        </div> <!-- .dm-commentsbox -->
+
+      </div> <!-- .dm-layout__flexRow -->
+        </div> <!-- main comments content area -->
+  
+          
+</div><!-- #comments .dm-section.dm-section--last -->  </div>
+</div>
+                </div> <!-- #main -->
+                <div id="shared_footer" class="dm-container dm-wrapper">
+                    <footer class="dm-footer">
+    <div class="dm-footer__inner-wrapper">
+        <div class="dm-socialmedia">
+            <h5 class="dm-socialmedia__headline" id="hl-sharefollow">Find us on</h5>
+            <ul class="dm-socialmedia__links" aria-labelledby="hl-sharefollow">
+                <li><a href="https://www.facebook.com/sapcommunity" title="Facebook"><span class="dm-icon-encoded--facebook"></span></a></li>
+                <li><a href="https://twitter.com/SAPCommunity" title="Twitter"><span class="dm-icon-encoded--twitter"></span></a></li>
+                <li><a href="https://www.youtube.com/c/SAPCommunities" title="YouTube"><span class="dm-icon-encoded--youtube"></span></a></li>
+                <li><a href="https://www.linkedin.com/company/sap" title="LinkedIn"><span class="dm-icon-encoded--linkedin"></span></a></li>
+                <li><a href="https://instagram.com/sap/" title="Instagram"><span class="dm-icon-encoded--instagram"></span></a></li>
+                <li><a href="http://www.slideshare.net/SAP" title="Slideshare"><span class="dm-icon-encoded--slideshare"></span></a></li>
+                <li><a href="mailto:?subject='SAP Community'" title="Email Share"><span class="dm-icon-encoded--email"></span></a></li>
+            </ul>
+        </div>
+        <nav role="navigation" class="dm-footer__navigation">
+            <ul class="dm-footer__navigation__list" aria-label="footer navigation">
+                <li><a href="http://sap.com/about/legal/privacy.html" target="_blank">Privacy</a></li>
+                <li><a href="http://sap.com/corporate/en/legal/terms-of-use.html" target="_blank">Terms of Use</a></li>
+                <li><a href="http://sap.com/about/legal/impressum.html" target="_blank">Legal Disclosure</a></li>
+                <li><a href="http://sap.com/about/legal/copyright.html" target="_blank">Copyright</a></li>
+                <li><a href="http://sap.com/about/legal/trademark.html" target="_blank">Trademark</a></li>
+                <li id="teconsent"></li>
+                <li><a href="https://www.sap.com/cmp/nl/sap-community-voice/index.html" target="_blank">Newsletter</a></li>
+                <li><a href="mailto:sapnetwork@sap.com" target="_blank">Support</a></li>
+            </ul>
+        </nav>
+    </div>
+</footer>                </div>
+            </div> <!-- #page -->
+            <script type="application/ld+json" data-schema="1066677-post-Default">{"@context":"https:\/\/schema.org\/","@type":"BlogPosting","@id":"https:\/\/blogs.sap.com\/2020\/03\/19\/sap-abap-security-code-scan\/#BlogPosting","mainEntityOfPage":"https:\/\/blogs.sap.com\/2020\/03\/19\/sap-abap-security-code-scan\/","headline":"SAP ABAP Security Code Scan","name":"SAP ABAP Security Code Scan","description":"SAP customers have always worked with SAP partners and ISVs to augment their SAP environment with third-party ABAP add-ons, that customers license directly from SAP partners. The security of these 3rd\u00a0party ABAP add-on is becoming","datePublished":"2020-03-19","dateModified":"2020-11-12","author":{"@type":"Person","@id":"https:\/\/blogs.sap.com\/author\/forrest.hu\/#Person","name":"Forrest Hu","url":"https:\/\/blogs.sap.com\/author\/forrest.hu\/","image":{"@type":"ImageObject","@id":"https:\/\/avatars.services.sap.com\/images\/forrest.hu_small.png","url":"https:\/\/avatars.services.sap.com\/images\/forrest.hu_small.png","height":96,"width":96}},"publisher":{"@type":"Organization","name":"SAP Community Blogs","":{"@type":"ImageObject","@id":"https:\/\/blogs.sap.com\/wp-content\/uploads\/2020\/03\/SAP_scrn_R-2.png","url":"https:\/\/blogs.sap.com\/wp-content\/uploads\/2020\/03\/SAP_scrn_R-2.png","width":600,"height":60}},"image":{"@type":"ImageObject","@id":"https:\/\/blogs.sap.com\/wp-content\/uploads\/2020\/03\/SAP_scrn_R-2.png","url":"https:\/\/blogs.sap.com\/wp-content\/uploads\/2020\/03\/SAP_scrn_R-2.png","width":100,"height":100},"url":"https:\/\/blogs.sap.com\/2020\/03\/19\/sap-abap-security-code-scan\/","about":["Technical Articles"],"wordCount":821,"keywords":["ICC Consultant"]}</script>
+<script type="application/ld+json" data-schema="Breadcrumb">{"@context":"https:\/\/schema.org\/","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"2020","item":"https:\/\/blogs.sap.com\/2020\/#breadcrumbitem"},{"@type":"ListItem","position":2,"name":"03","item":"https:\/\/blogs.sap.com\/2020\/\/03\/#breadcrumbitem"},{"@type":"ListItem","position":3,"name":"19","item":"https:\/\/blogs.sap.com\/2020\/\/03\/\/19\/#breadcrumbitem"},{"@type":"ListItem","position":4,"name":"SAP ABAP Security Code Scan","item":"https:\/\/blogs.sap.com\/2020\/03\/19\/sap-abap-security-code-scan\/#breadcrumbitem"}]}</script>
+<script type='text/javascript' id='unified_header-js-extra'>
+/* <![CDATA[ */
+var headerInitArgs = {"system":"blogs","wrapperID":"page","breadcrumbItems":[{"text":"Blogs","href":"https:\/\/blogs.sap.com"}]};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://static.community.services.sap/com-hdr/v5/403.184/shared-ui/1dx-assets/js/scn-header.min.js' id='unified_header-js'></script>
+<script type='text/javascript' id='unified_header-js-after'>
+            scnHeader.init(headerInitArgs);
+            setCookie("userArgs", headerInitArgs.user ? JSON.stringify(headerInitArgs.user) : "", { path : "/" });
+    
+</script>
+<script type='text/javascript' src='https://static.community.services.sap/designmate/v3/708.0/latest/header.js' id='designmate_header_script-js'></script>
+<script type='text/javascript' src='https://static.community.services.sap/designmate/v3/708.0/latest/subheader.js' id='designmate_subheader_script-js'></script>
+<script type='text/javascript' src='https://static.community.services.sap/designmate/v3/708.0/latest/designmate.js' id='designmate_script-js'></script>
+<script type='text/javascript' src='//accounts.sap.com/ui/resources/javascripts/SAP_IDS.js' id='ids_login_script-js'></script>
+<script type='text/javascript' src='https://blogs.sap.com/res1dx-3307/wp-includes/js/comment-reply.min.js' id='comment-reply-js'></script>
+<script type='text/javascript' id='satm_handler-js-extra'>
+/* <![CDATA[ */
+var satmContentSelectors = ["div.dm-contentDetail__body-content","div.dm-list-comments__item-content"];
+var satmProfileBaseUrl = "people.sap.com\/";
+var satmChangeableElementsSelectors = ["div.dm-list-comments__item-content"];
+var satmPluginEnabled = "1";
+var satmApiUrl = "https:\/\/uss.api.community.sap.com";
+var satmApiCallWithCredentials = "1";
+var satmRequestDelayMs = "100";
+/* ]]> */
+</script>
+<script type='text/javascript' defer src='https://blogs.sap.com/res1dx-3307/wp-content/plugins/sap-at-mention/js/sap-at-mention.min.js' id='satm_handler-js'></script>
+<script type='text/javascript' id='sap-comment-validation-js-extra'>
+/* <![CDATA[ */
+var commentValidation = {"validateMaxLinks":"1","max_links_number":"7","BLOGS_PAGE":"single"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://blogs.sap.com/res1dx-3307/wp-content/plugins/sap-comment-editor/js/sap-comment-validation.min.js' id='sap-comment-validation-js'></script>
+<script type='text/javascript' src='https://blogs.sap.com/res1dx-3307/wp-content/plugins/sap-core-custom/include/js/sap-post-status.min.js' id='scn_post_status_check-js'></script>
+<script type='text/javascript' src='https://blogs.sap.com/res1dx-3307/wp-content/themes/sap-v3-neo/js/jquery-plugins.min.js' id='sap_jquery_plugins-js'></script>
+<script type='text/javascript' id='sap-login-csrf-cookie-js-extra'>
+/* <![CDATA[ */
+var sapLoginCookieConfig = {"cookieName":"SAP_BLOGS_ANONYMOUS_NONCE","sapActionName":"s_action"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://blogs.sap.com/res1dx-3307/wp-content/plugins/sap-core-custom/include/js/sap-login-csrf-cookie.min.js' id='sap-login-csrf-cookie-js'></script>
+<script type='text/javascript' src='https://blogs.sap.com/res1dx-3307/wp-content/plugins/sap-lightbox-gallery/lib/lightbox-gallery.min.js' id='sap_lightbox_gallery_js-js'></script>
+<script type='text/javascript' src='https://blogs.sap.com/res1dx-3307/wp-content/themes/sap-v3-neo/js/choices.min.js' id='choices.js-js'></script>
+<script type='text/javascript' id='wprc-script-js-extra'>
+/* <![CDATA[ */
+var wprcajaxhandler = {"ajaxurl":"https:\/\/blogs.sap.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://blogs.sap.com/res1dx-3307/wp-content/plugins/sap-report-content/static/js/v3/scripts.min.js' id='wprc-script-js'></script>
+<script type='text/javascript' src='https://blogs.sap.com/res1dx-3307/wp-content/themes/sap-v3-neo/js/single.min.js' id='sap_single_v3-js'></script>
+<script type='text/javascript' src='https://blogs.sap.com/res1dx-3307/wp-content/themes/sap-v3-neo/js/onscroll-sticky.min.js' id='onscroll_sticky-js'></script>
+<script type='text/javascript' id='sap_assignedtags_widget_js_v3-js-extra'>
+/* <![CDATA[ */
+var assignedTagsWidgetSettings = {"maxItemsBeforeHide":"5","data":{"ABAP Extensibility":"https:\/\/blogs.sap.com\/tags\/338571334339306322581424656448659\/","Integration and Certification Center":"https:\/\/blogs.sap.com\/tags\/539667611584404255845040674498708\/","ICC Consultant":"https:\/\/blogs.sap.com\/tag\/icc-consultant\/"},"widgetClassname":".widget_sapassignedtagswidget-v3"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://blogs.sap.com/res1dx-3307/wp-content/plugins/sap-widgets/include/assigned-tags/js/sap-assigned-tags-widget.min.js' id='sap_assignedtags_widget_js_v3-js'></script>
+<script type='text/javascript' id='sap_relatedcontent_widget_js_v3-js-extra'>
+/* <![CDATA[ */
+var relatedContentWidgetSettings = {"widgetSelector":".widget_sap-relatedcontent-widget-v3","contentServiceUrl":"https:\/\/content.services.sap.com\/cse\/search\/topic","profileUrl":"https:\/\/people.sap.com","targetContentItem":{"id":1066677,"type":"blogpost","title":"SAP ABAP Security Code Scan","primary_tag":"338571334339306322581424656448659"}};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://blogs.sap.com/res1dx-3307/wp-content/plugins/sap-widgets/include/related-content/js/sap-related-content-widget.min.js' id='sap_relatedcontent_widget_js_v3-js'></script>
+<script type='text/javascript'>_satellite.pageBottom();</script>        </div> <!-- .page-wrapper -->
+    </body>
+</html>
